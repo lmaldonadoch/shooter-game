@@ -1,4 +1,4 @@
-class Entity extends Phaser.GameObjects.Sprite {
+export class Entity extends Phaser.GameObjects.Sprite {
   constructor(scene, x, y, key, type) {
     super(scene, x, y, key);
 
@@ -57,7 +57,7 @@ class Entity extends Phaser.GameObjects.Sprite {
   }
 }
 
-class Player extends Entity {
+export class Player extends Entity {
   constructor(scene, x, y, key) {
     super(scene, x, y, key, 'Player');
 
@@ -122,21 +122,21 @@ class Player extends Entity {
   }
 }
 
-class Expeliarmus extends Entity {
+export class Expeliarmus extends Entity {
   constructor(scene, x, y) {
     super(scene, x, y, 'ex');
     this.body.velocity.x = 200;
   }
 }
 
-class ExpectoPatronum extends Entity {
+export class ExpectoPatronum extends Entity {
   constructor(scene, x, y) {
     super(scene, x, y, 'ep');
     this.body.velocity.x = 200;
   }
 }
 
-class Dementor extends Entity {
+export class Dementor extends Entity {
   constructor(scene, x, y) {
     super(scene, x, y, 'dementor', 'ChaserShip');
     this.body.velocity.y = Phaser.Math.Between(50, 100);
@@ -171,7 +171,7 @@ class Dementor extends Entity {
   }
 }
 
-class DeathEater extends Entity {
+export class DeathEater extends Entity {
   constructor(scene, x, y) {
     super(scene, x, y, 'de', 'GunShip');
     this.play('de');
@@ -200,14 +200,14 @@ class DeathEater extends Entity {
   }
 }
 
-class EnemyLaser extends Entity {
+export class AvadaKedavra extends Entity {
   constructor(scene, x, y) {
     super(scene, x, y, 'ak');
     this.body.velocity.y = 200;
   }
 }
 
-class ScrollingBackground {
+export class ScrollingBackground {
   constructor(scene, key, velocityY) {
     this.scene = scene;
     this.key = key;
