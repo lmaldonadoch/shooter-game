@@ -36,6 +36,7 @@ export default class GameScene extends Phaser.Scene {
   }
 
   create() {
+    this.add.image(600, 300, 'bg');
     this.anims.create({
       key: 'hp',
       frames: this.anims.generateFrameNumbers('hp'),
@@ -49,14 +50,6 @@ export default class GameScene extends Phaser.Scene {
       frameRate: 20,
       repeat: -1,
     });
-
-    // creates background
-    this.backgrounds = [];
-    for (var i = 0; i < 5; i++) {
-      // create five scrolling backgrounds
-      var bg = new ScrollingBackground(this, 'bg', i * 10);
-      this.backgrounds.push(bg);
-    }
 
     // creates player
 
@@ -194,6 +187,8 @@ export default class GameScene extends Phaser.Scene {
       }
     }
 
+    // Destroys enemies out of scene
+
     for (var i = 0; i < this.enemies.getChildren().length; i++) {
       var enemy = this.enemies.getChildren()[i];
 
@@ -212,6 +207,42 @@ export default class GameScene extends Phaser.Scene {
         }
       }
       enemy.update();
+    }
+
+    // Destroys enemy lasers out of scene
+
+    for (var i = 0; i < this.enemyLasers.getChildren().length; i++) {
+      var laser = this.enemyLasers.getChildren()[i];
+      laser.update();
+
+      if (
+        laser.x < -laser.displayWidth ||
+        laser.x > this.game.config.width + laser.displayWidth ||
+        laser.y < -laser.displayHeight * 4 ||
+        laser.y > this.game.config.height + laser.displayHeight
+      ) {
+        if (laser) {
+          laser.destroy();
+        }
+      }
+    }
+
+    // Destroys player lasers out of scene
+
+    for (var i = 0; i < this.playerLasers.getChildren().length; i++) {
+      var laser = this.playerLasers.getChildren()[i];
+      laser.update();
+
+      if (
+        laser.x < -laser.displayWidth ||
+        laser.x > this.game.config.width + laser.displayWidth ||
+        laser.y < -laser.displayHeight * 4 ||
+        laser.y > this.game.config.height + laser.displayHeight
+      ) {
+        if (laser) {
+          laser.destroy();
+        }
+      }
     }
   }
 }
