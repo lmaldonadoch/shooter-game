@@ -179,7 +179,7 @@ export class DeathEater extends Entity {
     // Sets the shooting capability
 
     this.shootTimer = this.scene.time.addEvent({
-      delay: 1000,
+      delay: 1500,
       callback: function () {
         var laser = new AvadaKedavra(this.scene, this.x, this.y);
         laser.setScale(this.scaleX);

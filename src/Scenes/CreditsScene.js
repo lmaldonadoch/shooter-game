@@ -2,24 +2,29 @@ import 'phaser';
 import config from '../Config/config';
 
 export default class CreditsScene extends Phaser.Scene {
-  constructor () {
+  constructor() {
     super('Credits');
   }
 
-  create () {
-    this.creditsText = this.add.text(0, 0, 'Credits', { fontSize: '32px', fill: '#fff' });
-    this.madeByText = this.add.text(0, 0, 'Created By: Placeholder', { fontSize: '26px', fill: '#fff' });
-    this.zone = this.add.zone(config.width/2, config.height/2, config.width, config.height);
-
-    Phaser.Display.Align.In.Center(
-      this.creditsText,
-      this.zone
+  create() {
+    this.creditsText = this.add.text(0, 0, 'Credits', {
+      fontSize: '32px',
+      fill: '#fff',
+    });
+    this.madeByText = this.add.text(0, 0, 'Created By: Luis Angel Maldonado', {
+      fontSize: '26px',
+      fill: '#fff',
+    });
+    this.zone = this.add.zone(
+      config.width / 2,
+      config.height / 2,
+      config.width,
+      config.height
     );
 
-    Phaser.Display.Align.In.Center(
-      this.madeByText,
-      this.zone
-    );
+    Phaser.Display.Align.In.Center(this.creditsText, this.zone);
+
+    Phaser.Display.Align.In.Center(this.madeByText, this.zone);
 
     this.madeByText.setY(1000);
 
@@ -31,7 +36,7 @@ export default class CreditsScene extends Phaser.Scene {
       delay: 1000,
       onComplete: function () {
         this.destroy;
-      }
+      },
     });
 
     this.madeByTween = this.tweens.add({
@@ -43,7 +48,7 @@ export default class CreditsScene extends Phaser.Scene {
       onComplete: function () {
         this.madeByTween.destroy;
         this.scene.start('Title');
-      }.bind(this)
+      }.bind(this),
     });
   }
-};
+}
