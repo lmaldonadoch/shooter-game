@@ -67,7 +67,7 @@ Node
 
 ## 🤝 Contributing
 
-Contributions, issues and feature requests are welcome!
+- The main wizards sprites were made by the very talented artist [AetherWings](https://www.deviantart.com/aetherwings). Please go ahead and take a look at his work!
 
 Feel free to check the [issues page](https://github.com/lmaldonadoch/motorista/issues).
 
