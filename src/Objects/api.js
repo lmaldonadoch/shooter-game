@@ -38,7 +38,29 @@ const API = (() => {
     }
   }
 
-  return { getScores };
+  async function postScores(name, score) {
+    try {
+      const result = await fetch(
+        'https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/H5yqL2wSwI7OndDjAjut/scores/',
+        {
+          method: 'POST',
+          headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            user: name,
+            score: score,
+          }),
+        }
+      );
+      return result.json();
+    } catch (error) {
+      return error;
+    }
+  }
+
+  return { getScores, postScores };
 })();
 
 export default API;

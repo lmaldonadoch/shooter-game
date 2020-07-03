@@ -1,25 +1,25 @@
 import 'phaser';
 import config from '../Config/config';
 import Button from '../Objects/Button';
-import API from '../Objects/api';
 
 export default class TitleScene extends Phaser.Scene {
   constructor() {
     super('Title');
   }
 
-  create() {
-    // Scores
+  preload() {
+    this.load.image('bg', 'assets/entities/bg.png');
+  }
 
-    API.getScores().then((response) => {
-      console.log('here!!!');
-      console.log(response);
-    });
+  create() {
+    // BG
+    this.add.image(600, 300, 'bg');
+
     // Game
     this.gameButton = new Button(
       this,
       config.width / 2,
-      config.height / 2 - 100,
+      config.height / 2 - 150,
       'blueButton1',
       'blueButton2',
       'Play',
@@ -30,7 +30,7 @@ export default class TitleScene extends Phaser.Scene {
     this.optionsButton = new Button(
       this,
       config.width / 2,
-      config.height / 2,
+      config.height / 2 - 50,
       'blueButton1',
       'blueButton2',
       'Options',
@@ -41,11 +41,22 @@ export default class TitleScene extends Phaser.Scene {
     this.creditsButton = new Button(
       this,
       config.width / 2,
-      config.height / 2 + 100,
+      config.height / 2 + 50,
       'blueButton1',
       'blueButton2',
       'Credits',
       'Credits'
+    );
+
+    // Leaderboard
+    this.leaderButton = new Button(
+      this,
+      config.width / 2,
+      config.height / 2 + 150,
+      'blueButton1',
+      'blueButton2',
+      'Top Scores',
+      'LeaderBoardScene'
     );
 
     this.model = this.sys.game.globals.model;

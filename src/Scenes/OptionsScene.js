@@ -6,6 +6,10 @@ export default class OptionsScene extends Phaser.Scene {
     super('Options');
   }
 
+  preload() {
+    this.load.image('bg', 'assets/entities/bg.png');
+  }
+
   create() {
     this.model = this.sys.game.globals.model;
 
@@ -18,6 +22,8 @@ export default class OptionsScene extends Phaser.Scene {
 
     this.musicButton.setInteractive();
     this.soundButton.setInteractive();
+
+    this.add.image(600, 300, 'bg');
 
     this.musicButton.on(
       'pointerdown',

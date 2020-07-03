@@ -1,5 +1,6 @@
 import Button from '../Objects/Button';
 import config from '../Config/config';
+import API from '../Objects/api';
 
 export default class SceneGameOver extends Phaser.Scene {
   constructor() {
@@ -8,6 +9,10 @@ export default class SceneGameOver extends Phaser.Scene {
 
   create() {
     var score = JSON.parse(localStorage.getItem('score'));
+    if (!score) {
+      score = 1;
+    }
+    localStorage.clear();
     this.title = this.add.text(this.game.config.width * 0.5, 128, 'GAME OVER', {
       fontFamily: 'monospace',
       fontSize: 48,
@@ -51,13 +56,28 @@ export default class SceneGameOver extends Phaser.Scene {
     // creates form
 
     const div = document.createElement('div');
-    div.setAttribute(
-      'style',
-      'display: flex; flex-direction: column; align-items: center; justify-content: space-between;'
-    );
-    div.innerHTML = `<input type='search' placeholder='Write your initials!' aria-label='Search' style = 'margin-bottom: 60px; margin-top: 180px; margin-left: 90px; height: 50px; font-size: 32px; width: 300px;'/></br><button type='submit' style = 'border:none; background: #1BA0DE; color: white; font-size: 32px; padding: 7px 5px; margin-left: 130px; border-radius: 5px;' id = 'button'> Submit Score</button>`;
+    div.innerHTML = `<input type='search' id = 'input' placeholder='Write your name!' aria-label='Search' required/></br><button type='submit' id = 'button'> Submit Score</button>`;
 
     this.add.dom(this.game.config.width * 0.7, 250, div);
+
+    let button = document.getElementById('button');
+    let input = document.getElementById('input');
+    button.onclick = () => {
+      if (input.value !== '') {
+        div.classList.add('empty');
+        div.innerHTML = `<p>Please wait... </p>`;
+        API.postScores(input.value, score).then((response) => {
+          console.log(response);
+          div.innerHTML = `<p>${response.result} </p>`;
+        });
+      } else {
+        if (document.getElementsByTagName('p').length == 0) {
+          const p = document.createElement('p');
+          p.innerHTML = 'Name can not be blank';
+          div.appendChild(p);
+        }
+      }
+    };
 
     // Credits score
     this.submitButton = new Button(
