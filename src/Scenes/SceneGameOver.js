@@ -48,26 +48,16 @@ export default class SceneGameOver extends Phaser.Scene {
     );
     this.title.setOrigin(0.5);
 
-    // input tag
+    // creates form
 
-    this.add.dom(
-      this.game.config.width * 0.75,
-      250,
-      'div',
-      'background-color: white; width: 220px; height: 100px; font: 48px Arial',
-      'Phaser'
+    const div = document.createElement('div');
+    div.setAttribute(
+      'style',
+      'display: flex; flex-direction: column; align-items: center; justify-content: space-between;'
     );
+    div.innerHTML = `<input type='search' placeholder='Write your initials!' aria-label='Search' style = 'margin-bottom: 60px; margin-top: 180px; margin-left: 90px; height: 50px; font-size: 32px; width: 300px;'/></br><button type='submit' style = 'border:none; background: #1BA0DE; color: white; font-size: 32px; padding: 7px 5px; margin-left: 130px; border-radius: 5px;' id = 'button'> Submit Score</button>`;
 
-    // Submit score
-    this.submitButton = new Button(
-      this,
-      (config.width / 4) * 3,
-      config.height / 2 + 100,
-      'blueButton1',
-      'blueButton2',
-      'Submit',
-      'Submit'
-    );
+    this.add.dom(this.game.config.width * 0.7, 250, div);
 
     // Credits score
     this.submitButton = new Button(
