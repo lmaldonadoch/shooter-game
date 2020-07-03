@@ -1,6 +1,9 @@
 import 'phaser';
 import { Player, Dementor, DeathEater } from '../Objects/Entities';
 
+var score = 0;
+var scoreText;
+
 export default class GameScene extends Phaser.Scene {
   constructor() {
     super({ key: 'Game' });
@@ -9,7 +12,7 @@ export default class GameScene extends Phaser.Scene {
   preload() {
     //load background
 
-    this.load.image('bg', 'assets/entities/rocks.png');
+    this.load.image('bg', 'assets/entities/bg.png');
 
     // load death eater
     this.load.spritesheet('de', 'assets/entities/deC.png', {
@@ -37,6 +40,12 @@ export default class GameScene extends Phaser.Scene {
 
   create() {
     this.add.image(600, 300, 'bg');
+
+    scoreText = this.add.text(16, 16, 'score: 0', {
+      fontSize: '32px',
+      fill: '#000',
+    });
+
     this.anims.create({
       key: 'hp',
       frames: this.anims.generateFrameNumbers('hp'),
@@ -118,6 +127,13 @@ export default class GameScene extends Phaser.Scene {
         playerLaser.destroy();
         enemy.wandless(true);
         enemy.onDestroy();
+        if (enemy.getData('type') === 'GunShip') {
+          score += 15;
+        } else {
+          score += 10;
+        }
+        scoreText.setText('Score: ' + score);
+        localStorage.setItem('score', JSON.stringify(score));
       }
     });
 
