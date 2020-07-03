@@ -156,7 +156,7 @@ export default class GameScene extends Phaser.Scene {
           scoreText.setText('Score: ' + score);
           localStorage.setItem('score', JSON.stringify(score));
         } else {
-          // enemy.setAll('body.immovable', true);
+          enemy.body.immovable = true;
           expectopatronum.destroy();
         }
       }
