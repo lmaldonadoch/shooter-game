@@ -7,6 +7,7 @@ export default class SceneGameOver extends Phaser.Scene {
   }
 
   create() {
+    var score = JSON.parse(localStorage.getItem('score'));
     this.title = this.add.text(this.game.config.width * 0.5, 128, 'GAME OVER', {
       fontFamily: 'monospace',
       fontSize: 48,
@@ -24,7 +25,7 @@ export default class SceneGameOver extends Phaser.Scene {
     // Play Again
     this.gameButton = new Button(
       this,
-      config.width / 2,
+      config.width / 4,
       config.height / 2 - 100,
       'blueButton1',
       'blueButton2',
@@ -32,21 +33,46 @@ export default class SceneGameOver extends Phaser.Scene {
       'Game'
     );
 
+    //Score rendering
+    this.title = this.add.text(
+      this.game.config.width * 0.75,
+      200,
+      `Your score is: ${score}`,
+      {
+        fontFamily: 'monospace',
+        fontSize: 32,
+        fontStyle: 'bold',
+        color: '#ffffff',
+        align: 'center',
+      }
+    );
+    this.title.setOrigin(0.5);
+
+    // input tag
+
+    this.add.dom(
+      this.game.config.width * 0.75,
+      250,
+      'div',
+      'background-color: white; width: 220px; height: 100px; font: 48px Arial',
+      'Phaser'
+    );
+
     // Submit score
     this.submitButton = new Button(
       this,
-      config.width / 2,
-      config.height / 2,
+      (config.width / 4) * 3,
+      config.height / 2 + 100,
       'blueButton1',
       'blueButton2',
-      'Submit Score',
+      'Submit',
       'Submit'
     );
 
     // Credits score
     this.submitButton = new Button(
       this,
-      config.width / 2,
+      config.width / 4,
       config.height / 2 + 100,
       'blueButton1',
       'blueButton2',
