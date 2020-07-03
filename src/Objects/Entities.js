@@ -95,13 +95,27 @@ export class Player extends Entity {
 
     // Ads the timer functionality to the shoot action
 
-    if (this.getData('isShooting')) {
+    if (this.getData('isShootingExpeliarmus')) {
       if (this.getData('timerShootTick') < this.getData('timerShootDelay')) {
         this.setData('timerShootTick', this.getData('timerShootTick') + 1); // every game update, increase timerShootTick by one until we reach the value of timerShootDelay
       } else {
         // when the "manual timer" is triggered:
-        var laser = new Expeliarmus(this.scene, this.x, this.y);
-        this.scene.playerLasers.add(laser);
+        var expeliarmus = new Expeliarmus(this.scene, this.x, this.y);
+        this.scene.expeliarmus.add(expeliarmus);
+
+        //this.scene.sfx.laser.play(); // play the laser sound effect
+        this.setData('timerShootTick', 0);
+      }
+    }
+
+    if (this.getData('isShootingExpectoPatronum')) {
+      if (this.getData('timerShootTick') < this.getData('timerShootDelay')) {
+        this.setData('timerShootTick', this.getData('timerShootTick') + 1); // every game update, increase timerShootTick by one until we reach the value of timerShootDelay
+      } else {
+        // when the "manual timer" is triggered:
+
+        var expectopatronum = new ExpectoPatronum(this.scene, this.x, this.y);
+        this.scene.expectopatronum.add(expectopatronum);
 
         //this.scene.sfx.laser.play(); // play the laser sound effect
         this.setData('timerShootTick', 0);

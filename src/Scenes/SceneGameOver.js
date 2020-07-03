@@ -7,7 +7,14 @@ export default class SceneGameOver extends Phaser.Scene {
     super({ key: 'SceneGameOver' });
   }
 
+  preload() {
+    //load background
+
+    this.load.image('bg', 'assets/entities/logo-big.png');
+  }
+
   create() {
+    this.add.image(600, 300, 'bg');
     var score = JSON.parse(localStorage.getItem('score'));
     if (!score) {
       score = 1;

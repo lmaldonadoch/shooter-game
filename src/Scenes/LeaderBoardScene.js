@@ -8,7 +8,14 @@ export default class LeaderBoardScene extends Phaser.Scene {
     super('LeaderBoardScene');
   }
 
+  preload() {
+    //load background
+
+    this.load.image('bg', 'assets/entities/logo-big.png');
+  }
+
   create() {
+    this.add.image(600, 300, 'bg');
     API.getScores().then((response) => {
       console.log(response);
       const sortedResponse = response.result.sort((a, b) => {

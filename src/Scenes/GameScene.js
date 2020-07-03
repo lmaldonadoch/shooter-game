@@ -43,7 +43,7 @@ export default class GameScene extends Phaser.Scene {
 
     scoreText = this.add.text(16, 16, 'score: 0', {
       fontSize: '32px',
-      fill: '#000',
+      fill: '#fff',
     });
 
     this.anims.create({
@@ -68,7 +68,7 @@ export default class GameScene extends Phaser.Scene {
       this.game.config.height * 0.5,
       'hp'
     );
-    console.log(this.player);
+    this.player.setScale(1.5);
 
     // Creates instances of the keyboard to keys to move the player
 
@@ -78,9 +78,12 @@ export default class GameScene extends Phaser.Scene {
     this.keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
     this.keyJ = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.J);
 
+    this.keyI = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.I);
+
     //Adds ability to shoot
 
-    this.playerLasers = this.add.group();
+    this.expeliarmus = this.add.group();
+    this.expectopatronum = this.add.group();
     this.enemies = this.add.group();
     this.enemyLasers = this.add.group();
 
@@ -110,6 +113,7 @@ export default class GameScene extends Phaser.Scene {
         }
 
         if (enemy !== null) {
+          enemy.setScale(1.5);
           this.enemies.add(enemy);
         }
       },
@@ -117,23 +121,44 @@ export default class GameScene extends Phaser.Scene {
       loop: true,
     });
 
-    // Adds de collision destruction for enemies when touching player laser
+    // Adds de collision destruction for death eaters when touching player laser
 
-    this.physics.add.collider(this.playerLasers, this.enemies, function (
-      playerLaser,
+    this.physics.add.collider(this.expeliarmus, this.enemies, function (
+      expeliarmus,
       enemy
     ) {
       if (enemy) {
-        playerLaser.destroy();
-        enemy.wandless(true);
-        enemy.onDestroy();
         if (enemy.getData('type') === 'GunShip') {
+          enemy.wandless(true);
+          enemy.onDestroy();
+          expeliarmus.destroy();
           score += 15;
+          scoreText.setText('Score: ' + score);
+          localStorage.setItem('score', JSON.stringify(score));
         } else {
-          score += 10;
+          expeliarmus.destroy();
         }
-        scoreText.setText('Score: ' + score);
-        localStorage.setItem('score', JSON.stringify(score));
+      }
+    });
+
+    // Adds de collision destruction for dementors when touching player expectopatronum
+
+    this.physics.add.collider(this.expectopatronum, this.enemies, function (
+      expectopatronum,
+      enemy
+    ) {
+      if (enemy) {
+        if (enemy.getData('type') !== 'GunShip') {
+          enemy.wandless(true);
+          enemy.onDestroy();
+          expectopatronum.destroy();
+          score += 10;
+          scoreText.setText('Score: ' + score);
+          localStorage.setItem('score', JSON.stringify(score));
+        } else {
+          // enemy.setAll('body.immovable', true);
+          expectopatronum.destroy();
+        }
       }
     });
 
@@ -193,13 +218,23 @@ export default class GameScene extends Phaser.Scene {
       }
 
       if (this.keyJ.isDown) {
-        this.player.setData('isShooting', true);
+        this.player.setData('isShootingExpeliarmus', true);
       } else {
         this.player.setData(
           'timerShootTick',
           this.player.getData('timerShootDelay') - 1
         );
-        this.player.setData('isShooting', false);
+        this.player.setData('isShootingExpeliarmus', false);
+      }
+
+      if (this.keyI.isDown) {
+        this.player.setData('isShootingExpectoPatronum', true);
+      } else {
+        this.player.setData(
+          'timerShootTick',
+          this.player.getData('timerShootDelay') - 1
+        );
+        this.player.setData('isShootingExpectoPatronum', false);
       }
     }
 
@@ -245,8 +280,8 @@ export default class GameScene extends Phaser.Scene {
 
     // Destroys player lasers out of scene
 
-    for (var i = 0; i < this.playerLasers.getChildren().length; i++) {
-      var laser = this.playerLasers.getChildren()[i];
+    for (var i = 0; i < this.expeliarmus.getChildren().length; i++) {
+      var laser = this.expeliarmus.getChildren()[i];
       laser.update();
 
       if (

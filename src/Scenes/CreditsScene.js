@@ -1,12 +1,20 @@
 import 'phaser';
 import config from '../Config/config';
+import Button from '../Objects/Button';
 
 export default class CreditsScene extends Phaser.Scene {
   constructor() {
     super('Credits');
   }
 
+  preload() {
+    //load background
+
+    this.load.image('bg', 'assets/entities/logo-big.png');
+  }
+
   create() {
+    this.add.image(600, 300, 'bg');
     this.creditsText = this.add.text(0, 0, 'Credits', {
       fontSize: '32px',
       fill: '#fff',
@@ -20,6 +28,16 @@ export default class CreditsScene extends Phaser.Scene {
       config.height / 2,
       config.width,
       config.height
+    );
+
+    this.titleButton = new Button(
+      this,
+      config.width / 2,
+      1000,
+      'blueButton1',
+      'blueButton2',
+      'Back',
+      'Title'
     );
 
     Phaser.Display.Align.In.Center(this.creditsText, this.zone);
@@ -49,6 +67,15 @@ export default class CreditsScene extends Phaser.Scene {
         this.madeByTween.destroy;
         this.scene.start('Title');
       }.bind(this),
+    });
+
+    this.madeByTween = this.tweens.add({
+      targets: this.titleButton,
+      y: 250,
+      ease: 'Power1',
+      duration: 8000,
+      delay: 1000,
+      onComplete: function () {}.bind(this),
     });
   }
 }
