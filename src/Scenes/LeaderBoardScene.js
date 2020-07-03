@@ -19,9 +19,8 @@ export default class LeaderBoardScene extends Phaser.Scene {
     API.getScores().then((response) => {
       console.log(response);
       const sortedResponse = response.result.sort((a, b) => {
-        a.score - b.score;
+        return b.score - a.score;
       });
-      console.log(sortedResponse);
       let namesToDisplay = '';
 
       for (let i = 0; i < 7; i += 1) {
