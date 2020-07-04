@@ -1,3 +1,11 @@
+body {
+  display: flex;
+  min-height: 100vh;
+  min-width: 100vw;
+  justify-content: center;
+  align-items: center;
+}
+
 input {
   margin-bottom: 60px;
   margin-top: 180px;

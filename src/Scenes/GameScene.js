@@ -1,7 +1,6 @@
 import 'phaser';
 import { Player, Dementor, DeathEater } from '../Objects/Entities';
 
-var score = 0;
 var scoreText;
 
 export default class GameScene extends Phaser.Scene {
@@ -39,6 +38,7 @@ export default class GameScene extends Phaser.Scene {
   }
 
   create() {
+    var score = 0;
     this.add.image(600, 300, 'bg');
 
     scoreText = this.add.text(16, 16, 'score: 0', {
@@ -148,7 +148,7 @@ export default class GameScene extends Phaser.Scene {
       enemy
     ) {
       if (enemy) {
-        if (enemy.getData('type') !== 'GunShip') {
+        if (enemy.getData('type') === 'ChaserShip') {
           enemy.wandless(true);
           enemy.onDestroy();
           expectopatronum.destroy();
@@ -156,7 +156,6 @@ export default class GameScene extends Phaser.Scene {
           scoreText.setText('Score: ' + score);
           localStorage.setItem('score', JSON.stringify(score));
         } else {
-          enemy.body.immovable = true;
           expectopatronum.destroy();
         }
       }

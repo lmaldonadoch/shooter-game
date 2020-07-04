@@ -189,6 +189,7 @@ export class DeathEater extends Entity {
     super(scene, x, y, 'de', 'GunShip');
     this.play('de');
     this.body.velocity.y = Phaser.Math.Between(50, 200);
+    this.body.immovable = true;
 
     // Sets the shooting capability
 
