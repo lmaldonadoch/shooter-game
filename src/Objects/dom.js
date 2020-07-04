@@ -17,7 +17,6 @@ const Dom = (() => {
         div.classList.add('empty');
         div.innerHTML = `<p>Please wait... </p>`;
         API.postScores(input.value, score).then((response) => {
-          console.log(response);
           div.innerHTML = `<p>${response.result} </p>`;
         });
       } else {

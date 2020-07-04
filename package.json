@@ -5,7 +5,8 @@
   "main": "src/index.js",
   "scripts": {
     "build": "webpack",
-    "start": "npm run build && webpack-dev-server --port=8000"
+    "start": "npm run build && webpack-dev-server --port=8000",
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -18,12 +19,20 @@
   },
   "homepage": "https://github.com/lmaldonadoch/shooter-game#readme",
   "devDependencies": {
+    "@babel/plugin-transform-regenerator": "^7.10.4",
+    "@babel/plugin-transform-runtime": "^7.10.4",
+    "@babel/preset-env": "^7.10.4",
     "css-loader": "^3.6.0",
+    "jest": "^26.1.0",
     "phaser": "^3.3.0",
     "raw-loader": "^0.5.1",
     "style-loader": "^1.2.1",
     "webpack": "^3.4.1",
     "webpack-dev-server": "^2.11.0"
   },
-  "author": "Luis Angel Maldonado Chavez"
+  "author": "Luis Angel Maldonado Chavez",
+  "dependencies": {
+    "babel-runtime": "^6.26.0",
+    "regenerator-runtime": "^0.13.5"
+  }
 }

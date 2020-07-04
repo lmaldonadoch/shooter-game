@@ -1,5 +1,6 @@
 import 'phaser';
 import { Player, Dementor, DeathEater } from '../Objects/Entities';
+import LocalStorage from '../Objects/localStorage';
 
 var scoreText;
 
@@ -115,7 +116,7 @@ export default class GameScene extends Phaser.Scene {
           expeliarmus.destroy();
           score += 15;
           scoreText.setText('Score: ' + score);
-          localStorage.setItem('score', JSON.stringify(score));
+          LocalStorage.saveLocalStorage(score);
         } else {
           expeliarmus.destroy();
         }
@@ -133,7 +134,7 @@ export default class GameScene extends Phaser.Scene {
           expectopatronum.destroy();
           score += 10;
           scoreText.setText('Score: ' + score);
-          localStorage.setItem('score', JSON.stringify(score));
+          LocalStorage.saveLocalStorage(score);
         } else {
           expectopatronum.destroy();
         }

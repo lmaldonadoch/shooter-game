@@ -2,6 +2,7 @@ import Button from '../Objects/Button';
 import config from '../Config/config';
 import API from '../Objects/api';
 import Dom from '../Objects/dom';
+import LocalStorage from '../Objects/localStorage';
 
 export default class SceneGameOver extends Phaser.Scene {
   constructor() {
@@ -25,11 +26,10 @@ export default class SceneGameOver extends Phaser.Scene {
     this.input.keyboard.preventDefault = false;
 
     this.add.image(600, 300, 'bg');
-    var score = JSON.parse(localStorage.getItem('score'));
-    if (!score) {
-      score = 1;
-    }
-    localStorage.clear();
+
+    let score = LocalStorage.readLocalStorage();
+    LocalStorage.clearLocalStorage();
+
     this.title = this.add.text(this.game.config.width * 0.5, 128, 'GAME OVER', {
       fontFamily: 'monospace',
       fontSize: 48,
