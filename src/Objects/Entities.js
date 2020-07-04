@@ -62,7 +62,7 @@ export class Player extends Entity {
     super(scene, x, y, key, 'Player');
 
     this.setData('speed', 200);
-    this.play('sprPlayer');
+    this.play('hp');
 
     //adds ability to shoot
 

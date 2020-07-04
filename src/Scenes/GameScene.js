@@ -162,7 +162,7 @@ export default class GameScene extends Phaser.Scene {
     });
 
     // Adds collision destruction for player when touching an enemy
-
+    var scene = this;
     this.physics.add.overlap(this.player, this.enemies, function (
       player,
       enemy

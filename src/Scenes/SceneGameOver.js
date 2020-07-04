@@ -14,6 +14,16 @@ export default class SceneGameOver extends Phaser.Scene {
   }
 
   create() {
+    this.input.keyboard.removeCapture(Phaser.Input.Keyboard.KeyCodes.W);
+    this.input.keyboard.removeCapture(Phaser.Input.Keyboard.KeyCodes.S);
+    this.input.keyboard.removeCapture(Phaser.Input.Keyboard.KeyCodes.A);
+    this.input.keyboard.removeCapture(Phaser.Input.Keyboard.KeyCodes.D);
+    this.input.keyboard.removeCapture(Phaser.Input.Keyboard.KeyCodes.J);
+    this.input.keyboard.removeCapture(Phaser.Input.Keyboard.KeyCodes.I);
+
+    this.input.keyboard.enabled = false;
+    this.input.keyboard.preventDefault = false;
+
     this.add.image(600, 300, 'bg');
     var score = JSON.parse(localStorage.getItem('score'));
     if (!score) {
