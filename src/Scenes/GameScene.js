@@ -9,27 +9,19 @@ export default class GameScene extends Phaser.Scene {
   }
 
   preload() {
-    //load background
-
     this.load.image('bg', 'assets/entities/bg.png');
 
-    // load death eater
     this.load.spritesheet('de', 'assets/entities/deC.png', {
       frameWidth: 32,
       frameHeight: 49,
     });
 
-    //load dementor
-
     this.load.image('dementor', 'assets/entities/dementor.png');
 
-    //loads spells
     this.load.image('ak', 'assets/entities/ak.png');
     this.load.image('ex', 'assets/entities/ex.png');
     this.load.image('pt', 'assets/entities/pt.png');
     this.load.image('ep', 'assets/entities/epC.png');
-
-    //loads hp
 
     this.load.spritesheet('hp', 'assets/entities/hpC.png', {
       frameWidth: 32,
@@ -60,8 +52,6 @@ export default class GameScene extends Phaser.Scene {
       repeat: -1,
     });
 
-    // creates player
-
     this.player = new Player(
       this,
       this.game.config.height * 0.05,
@@ -70,27 +60,20 @@ export default class GameScene extends Phaser.Scene {
     );
     this.player.setScale(1.5);
 
-    // Creates instances of the keyboard to keys to move the player
-
     this.keyW = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
     this.keyS = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
     this.keyA = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
     this.keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
     this.keyJ = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.J);
-
     this.keyI = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.I);
-
-    //Adds ability to shoot
 
     this.expeliarmus = this.add.group();
     this.expectopatronum = this.add.group();
     this.enemies = this.add.group();
     this.enemyLasers = this.add.group();
 
-    // Creates the spawning of the enemies as a timer
-
     this.time.addEvent({
-      delay: 1500,
+      delay: 1000,
       callback: function () {
         var enemy = null;
 
@@ -107,7 +90,7 @@ export default class GameScene extends Phaser.Scene {
             enemy = new Dementor(
               this,
               this.game.config.width * 0.95,
-              this.game.config.height * 0.5
+              this.game.config.height * Math.random()
             );
           }
         }
@@ -120,8 +103,6 @@ export default class GameScene extends Phaser.Scene {
       callbackScope: this,
       loop: true,
     });
-
-    // Adds de collision destruction for death eaters when touching player laser
 
     this.physics.add.collider(this.expeliarmus, this.enemies, function (
       expeliarmus,
@@ -141,8 +122,6 @@ export default class GameScene extends Phaser.Scene {
       }
     });
 
-    // Adds de collision destruction for dementors when touching player expectopatronum
-
     this.physics.add.collider(this.expectopatronum, this.enemies, function (
       expectopatronum,
       enemy
@@ -161,8 +140,6 @@ export default class GameScene extends Phaser.Scene {
       }
     });
 
-    // Adds collision destruction for player when touching an enemy
-    var scene = this;
     this.physics.add.overlap(this.player, this.enemies, function (
       player,
       enemy
@@ -174,8 +151,6 @@ export default class GameScene extends Phaser.Scene {
         enemy.destroy();
       }
     });
-
-    // Adds collision destruction for player when reached by a laser
 
     this.physics.add.overlap(this.player, this.enemyLasers, function (
       player,
@@ -237,60 +212,25 @@ export default class GameScene extends Phaser.Scene {
       }
     }
 
-    // Destroys enemies out of scene
+    this.removeEntities(this.enemyLasers);
+    this.removeEntities(this.enemies);
+    this.removeEntities(this.expeliarmus);
+    this.removeEntities(this.expectopatronum);
+  }
 
-    for (var i = 0; i < this.enemies.getChildren().length; i++) {
-      var enemy = this.enemies.getChildren()[i];
-
-      if (
-        enemy.x < -enemy.displayWidth ||
-        enemy.x > this.game.config.width + enemy.displayWidth ||
-        enemy.y < -enemy.displayHeight * 4 ||
-        enemy.y > this.game.config.height + enemy.displayHeight
-      ) {
-        if (enemy) {
-          if (enemy.onDestroy !== undefined) {
-            enemy.onDestroy();
-          }
-
-          enemy.destroy();
-        }
-      }
-      enemy.update();
-    }
-
-    // Destroys enemy lasers out of scene
-
-    for (var i = 0; i < this.enemyLasers.getChildren().length; i++) {
-      var laser = this.enemyLasers.getChildren()[i];
-      laser.update();
+  removeEntities(entities) {
+    for (var i = 0; i < entities.getChildren().length; i++) {
+      var entity = entities.getChildren()[i];
+      entity.update();
 
       if (
-        laser.x < -laser.displayWidth ||
-        laser.x > this.game.config.width + laser.displayWidth ||
-        laser.y < -laser.displayHeight * 4 ||
-        laser.y > this.game.config.height + laser.displayHeight
+        entity.x < -entity.displayWidth ||
+        entity.x > this.game.config.width + entity.displayWidth ||
+        entity.y < -entity.displayHeight * 4 ||
+        entity.y > this.game.config.height + entity.displayHeight
       ) {
-        if (laser) {
-          laser.destroy();
-        }
-      }
-    }
-
-    // Destroys player lasers out of scene
-
-    for (var i = 0; i < this.expeliarmus.getChildren().length; i++) {
-      var laser = this.expeliarmus.getChildren()[i];
-      laser.update();
-
-      if (
-        laser.x < -laser.displayWidth ||
-        laser.x > this.game.config.width + laser.displayWidth ||
-        laser.y < -laser.displayHeight * 4 ||
-        laser.y > this.game.config.height + laser.displayHeight
-      ) {
-        if (laser) {
-          laser.destroy();
+        if (entity) {
+          entity.destroy();
         }
       }
     }

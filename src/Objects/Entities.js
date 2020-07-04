@@ -12,10 +12,7 @@ export class Entity extends Phaser.GameObjects.Sprite {
 
   wandless() {
     if (!this.getData('isDead') && !this.getData('wandless')) {
-      this.setTint(0x00b3ff); // Setting the color of the enemy to blue
-
-      // play the wand disarm sfx
-      // this.scene.sfx.disarm.play();
+      this.setTint(0x00b3ff);
 
       if (this.shootTimer !== undefined) {
         if (this.shootTimer) {
@@ -26,33 +23,18 @@ export class Entity extends Phaser.GameObjects.Sprite {
       this.setAngle(0);
       this.body.setVelocity(300, 300);
 
-      // this.on(
-      //   'animationcomplete',
-      //   function () {
-      //     if (canDestroy) {
-      //       this.destroy();
-      //     } else {
-      //       this.setVisible(false);
-      //     }
-      //   },
-      //   this
-      // );
-
       this.setData('isDead', true);
     }
   }
 
   petrified() {
-    let possibility = this.wandless ? 10 : Math.round(Math.random() * 10); //sets the possibility of the character to get petrified
+    let possibility = this.wandless ? 10 : Math.round(Math.random() * 10);
 
     if (possibility >= 7) {
-      // this.scene.sfx.petrified.play();
       this.setAngle(0);
       this.body.setVelocity(0, 0);
       this.destroy();
       this.setData('isDead', true);
-    } else {
-      // this.scene.sfx.blocked.play();
     }
   }
 }
@@ -63,8 +45,6 @@ export class Player extends Entity {
 
     this.setData('speed', 200);
     this.play('hp');
-
-    //adds ability to shoot
 
     this.setData('isShooting', false);
     this.setData('timerShootDelay', 10);
@@ -93,31 +73,23 @@ export class Player extends Entity {
     this.x = Phaser.Math.Clamp(this.x, 0, this.scene.game.config.width);
     this.y = Phaser.Math.Clamp(this.y, 0, this.scene.game.config.height);
 
-    // Ads the timer functionality to the shoot action
-
     if (this.getData('isShootingExpeliarmus')) {
       if (this.getData('timerShootTick') < this.getData('timerShootDelay')) {
-        this.setData('timerShootTick', this.getData('timerShootTick') + 1); // every game update, increase timerShootTick by one until we reach the value of timerShootDelay
+        this.setData('timerShootTick', this.getData('timerShootTick') + 1);
       } else {
-        // when the "manual timer" is triggered:
         var expeliarmus = new Expeliarmus(this.scene, this.x, this.y);
         this.scene.expeliarmus.add(expeliarmus);
-
-        //this.scene.sfx.laser.play(); // play the laser sound effect
         this.setData('timerShootTick', 0);
       }
     }
 
     if (this.getData('isShootingExpectoPatronum')) {
       if (this.getData('timerShootTick') < this.getData('timerShootDelay')) {
-        this.setData('timerShootTick', this.getData('timerShootTick') + 1); // every game update, increase timerShootTick by one until we reach the value of timerShootDelay
+        this.setData('timerShootTick', this.getData('timerShootTick') + 1);
       } else {
-        // when the "manual timer" is triggered:
-
         var expectopatronum = new ExpectoPatronum(this.scene, this.x, this.y);
         this.scene.expectopatronum.add(expectopatronum);
 
-        //this.scene.sfx.laser.play(); // play the laser sound effect
         this.setData('timerShootTick', 0);
       }
     }
@@ -125,7 +97,6 @@ export class Player extends Entity {
 
   onDestroy() {
     this.scene.time.addEvent({
-      // go to game over scene
       delay: 1000,
       callback: function () {
         this.scene.scene.start('SceneGameOver');
@@ -190,8 +161,6 @@ export class DeathEater extends Entity {
     this.play('de');
     this.body.velocity.y = Phaser.Math.Between(50, 200);
     this.body.immovable = true;
-
-    // Sets the shooting capability
 
     this.shootTimer = this.scene.time.addEvent({
       delay: 1500,

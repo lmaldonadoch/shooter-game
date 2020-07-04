@@ -8,8 +8,6 @@ export default class CreditsScene extends Phaser.Scene {
   }
 
   preload() {
-    //load background
-
     this.load.image('bg', 'assets/entities/logo-big.png');
   }
 

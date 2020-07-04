@@ -1,6 +1,7 @@
 import Button from '../Objects/Button';
 import config from '../Config/config';
 import API from '../Objects/api';
+import Dom from '../Objects/dom';
 
 export default class SceneGameOver extends Phaser.Scene {
   constructor() {
@@ -8,9 +9,8 @@ export default class SceneGameOver extends Phaser.Scene {
   }
 
   preload() {
-    //load background
-
     this.load.image('bg', 'assets/entities/logo-big.png');
+    API;
   }
 
   create() {
@@ -39,12 +39,6 @@ export default class SceneGameOver extends Phaser.Scene {
     });
     this.title.setOrigin(0.5);
 
-    // this.sfx = {
-    //   btnOver: this.sound.add('sndBtnOver'),
-    //   btnDown: this.sound.add('sndBtnDown'),
-    // };
-
-    // Play Again
     this.gameButton = new Button(
       this,
       config.width / 4,
@@ -55,7 +49,6 @@ export default class SceneGameOver extends Phaser.Scene {
       'Game'
     );
 
-    //Score rendering
     this.title = this.add.text(
       this.game.config.width * 0.75,
       200,
@@ -70,31 +63,10 @@ export default class SceneGameOver extends Phaser.Scene {
     );
     this.title.setOrigin(0.5);
 
-    // creates form
-
-    const div = document.createElement('div');
-    div.innerHTML = `<input type='search' id = 'input' placeholder='Write your name!' aria-label='Search' required/></br><button type='submit' id = 'button'> Submit Score</button>`;
-
+    const div = Dom.createForm();
     this.add.dom(this.game.config.width * 0.7, 250, div);
 
-    let button = document.getElementById('button');
-    let input = document.getElementById('input');
-    button.onclick = () => {
-      if (input.value !== '') {
-        div.classList.add('empty');
-        div.innerHTML = `<p>Please wait... </p>`;
-        API.postScores(input.value, score).then((response) => {
-          console.log(response);
-          div.innerHTML = `<p>${response.result} </p>`;
-        });
-      } else {
-        if (document.getElementsByTagName('p').length == 0) {
-          const p = document.createElement('p');
-          p.innerHTML = 'Name can not be blank';
-          div.appendChild(p);
-        }
-      }
-    };
+    Dom.addButtonFunctionality(score);
 
     // Credits score
     this.submitButton = new Button(
