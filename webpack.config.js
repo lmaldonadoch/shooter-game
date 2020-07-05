@@ -13,14 +13,6 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.js$/,
-        exclude: /node_modules/,
-        loader: 'babel-loader',
-        query: {
-          presets: ['es2015'],
-        },
-      },
-      {
         test: [/\.vert$/, /\.frag$/],
         use: 'raw-loader',
       },
@@ -33,6 +25,12 @@ module.exports = {
         use: ['file-loader'],
       },
     ],
+  },
+
+  devServer: {
+    contentBase: path.join(__dirname, 'dist'),
+    compress: true,
+    port: 9000,
   },
 
   plugins: [
