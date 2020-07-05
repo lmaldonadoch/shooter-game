@@ -6,7 +6,7 @@ var app = express();
 
 if (process.env.NODE_ENV === 'production') {
   // Exprees will serve up production assets
-  app.use(express.static(path.join(__dirname, 'build')));
+  app.use('/build', express.static(path.join(__dirname, 'build')));
 
   // Express serve up index.html file if it doesn't recognize route
   app.get('*', (req, res) => {
