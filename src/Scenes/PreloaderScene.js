@@ -15,7 +15,7 @@ export default class PreloaderScene extends Phaser.Scene {
     this.load.image('blueButton2', 'assets/ui/blue_button03.png');
     this.load.image('box', 'assets/ui/grey_box.png');
     this.load.image('checkedBox', 'assets/ui/blue_boxCheckmark.png');
-    this.load.audio('bgMusic', ['assets/TownTheme.mp3']);
+    // this.load.audio('bgMusic', 'assets/TownTheme.mp3');
 
     const progressBar = this.add.graphics();
     const progressBox = this.add.graphics();
@@ -77,12 +77,12 @@ export default class PreloaderScene extends Phaser.Scene {
       this.ready();
     });
 
-    this.timedEvent = this.time.delayedCall(3000, this.ready, [], this);
+    this.timedEvent = this.time.delayedCall(500, this.ready, [], this);
   }
 
   ready() {
     this.readyCount += 1;
-    if (this.readyCount === 4) {
+    if (this.readyCount === 2) {
       this.scene.start('Title');
     }
   }
