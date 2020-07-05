@@ -1,3 +1,5 @@
+/* eslint-disable no-undef */
+/* eslint-disable max-classes-per-file */
 export class Entity extends Phaser.GameObjects.Sprite {
   constructor(scene, x, y, key, type) {
     super(scene, x, y, key);
@@ -28,7 +30,7 @@ export class Entity extends Phaser.GameObjects.Sprite {
   }
 
   petrified() {
-    let possibility = this.wandless ? 10 : Math.round(Math.random() * 10);
+    const possibility = this.wandless ? 10 : Math.round(Math.random() * 10);
 
     if (possibility >= 7) {
       this.setAngle(0);
@@ -36,6 +38,27 @@ export class Entity extends Phaser.GameObjects.Sprite {
       this.destroy();
       this.setData('isDead', true);
     }
+  }
+}
+
+export class Expeliarmus extends Entity {
+  constructor(scene, x, y) {
+    super(scene, x, y, 'ex');
+    this.body.velocity.x = 200;
+  }
+}
+
+export class ExpectoPatronum extends Entity {
+  constructor(scene, x, y) {
+    super(scene, x, y, 'ep');
+    this.body.velocity.x = 200;
+  }
+}
+
+export class AvadaKedavra extends Entity {
+  constructor(scene, x, y) {
+    super(scene, x, y, 'ak');
+    this.body.velocity.x = -200;
   }
 }
 
@@ -77,7 +100,7 @@ export class Player extends Entity {
       if (this.getData('timerShootTick') < this.getData('timerShootDelay')) {
         this.setData('timerShootTick', this.getData('timerShootTick') + 1);
       } else {
-        var expeliarmus = new Expeliarmus(this.scene, this.x, this.y);
+        const expeliarmus = new Expeliarmus(this.scene, this.x, this.y);
         this.scene.expeliarmus.add(expeliarmus);
         this.setData('timerShootTick', 0);
       }
@@ -87,7 +110,7 @@ export class Player extends Entity {
       if (this.getData('timerShootTick') < this.getData('timerShootDelay')) {
         this.setData('timerShootTick', this.getData('timerShootTick') + 1);
       } else {
-        var expectopatronum = new ExpectoPatronum(this.scene, this.x, this.y);
+        const expectopatronum = new ExpectoPatronum(this.scene, this.x, this.y);
         this.scene.expectopatronum.add(expectopatronum);
 
         this.setData('timerShootTick', 0);
@@ -98,26 +121,12 @@ export class Player extends Entity {
   onDestroy() {
     this.scene.time.addEvent({
       delay: 1000,
-      callback: function () {
+      callback() {
         this.scene.scene.start('SceneGameOver');
       },
       callbackScope: this,
       loop: false,
     });
-  }
-}
-
-export class Expeliarmus extends Entity {
-  constructor(scene, x, y) {
-    super(scene, x, y, 'ex');
-    this.body.velocity.x = 200;
-  }
-}
-
-export class ExpectoPatronum extends Entity {
-  constructor(scene, x, y) {
-    super(scene, x, y, 'ep');
-    this.body.velocity.x = 200;
   }
 }
 
@@ -137,13 +146,13 @@ export class Dementor extends Entity {
     if (!this.getData('isDead') && this.scene.player) {
       this.state = this.states.CHASE;
 
-      if (this.state == this.states.CHASE) {
-        var dx = this.scene.player.x - this.x;
-        var dy = this.scene.player.y - this.y;
+      if (this.state === this.states.CHASE) {
+        const dx = this.scene.player.x - this.x;
+        const dy = this.scene.player.y - this.y;
 
-        var angle = Math.atan2(dy, dx);
+        const angle = Math.atan2(dy, dx);
 
-        var speed = 100;
+        const speed = 100;
         this.body.setVelocity(Math.cos(angle) * speed, Math.sin(angle) * speed);
       }
     }
@@ -164,8 +173,8 @@ export class DeathEater extends Entity {
 
     this.shootTimer = this.scene.time.addEvent({
       delay: 1500,
-      callback: function () {
-        var laser = new AvadaKedavra(this.scene, this.x, this.y);
+      callback() {
+        const laser = new AvadaKedavra(this.scene, this.x, this.y);
         laser.setScale(this.scaleX);
         this.scene.enemyLasers.add(laser);
       },
@@ -184,25 +193,17 @@ export class DeathEater extends Entity {
 
   update() {
     if (
-      !this.getData('isDead') &&
-      this.scene !== undefined &&
-      this.scene.player
+      !this.getData('isDead')
+      && this.scene !== undefined
+      && this.scene.player
     ) {
       if (this.y > this.scene.player.y) {
-        this.body.velocity.y =
-          this.body.velocity.y < 0
-            ? this.body.velocity.y
-            : this.body.velocity.y * -1;
+        this.body.velocity.y = this.body.velocity.y < 0
+          ? this.body.velocity.y
+          : this.body.velocity.y * -1;
       } else {
         this.body.velocity.y = Math.abs(this.body.velocity.y);
       }
     }
-  }
-}
-
-export class AvadaKedavra extends Entity {
-  constructor(scene, x, y) {
-    super(scene, x, y, 'ak');
-    this.body.velocity.x = -200;
   }
 }

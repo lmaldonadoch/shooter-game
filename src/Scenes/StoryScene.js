@@ -2,15 +2,13 @@ import 'phaser';
 import config from '../Config/config';
 import Button from '../Objects/Button';
 import Dom from '../Objects/dom';
-
+// eslint-disable-next-line no-undef
 export default class StoryScene extends Phaser.Scene {
   constructor() {
     super('StoryScene');
   }
 
   preload() {
-    //load background
-
     this.load.image('bg', 'assets/entities/logo-big.png');
   }
 
@@ -22,7 +20,7 @@ export default class StoryScene extends Phaser.Scene {
     this.add.dom(
       this.game.config.width + 50,
       this.game.config.hight * 0.5,
-      div
+      div,
     );
 
     this.playButton = new Button(
@@ -32,7 +30,7 @@ export default class StoryScene extends Phaser.Scene {
       'blueButton1',
       'blueButton2',
       'Play',
-      'Game'
+      'Game',
     );
   }
 }

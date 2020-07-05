@@ -5,9 +5,7 @@ it('Retrieves the scores from the DB', () => {
     .then((response) => {
       expect(response).toBe('Succeed');
     })
-    .catch((error) => {
-      return error;
-    });
+    .catch((error) => error);
 });
 
 it('Post a new score to database', () => {
@@ -15,7 +13,5 @@ it('Post a new score to database', () => {
     .then((response) => {
       expect(response).toBe('Leaderboard score created correctly.');
     })
-    .catch((error) => {
-      return error;
-    });
+    .catch((error) => error);
 });

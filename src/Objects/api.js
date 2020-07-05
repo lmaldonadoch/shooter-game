@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 const API = (() => {
   async function getKey() {
     try {
@@ -12,7 +13,7 @@ const API = (() => {
           body: JSON.stringify({
             name: 'HP shooter game',
           }),
-        }
+        },
       );
       return response;
     } catch (error) {
@@ -30,7 +31,7 @@ const API = (() => {
             Accept: 'application/json',
             'Content-Type': 'application/json',
           },
-        }
+        },
       );
       return scores.json();
     } catch (error) {
@@ -50,9 +51,9 @@ const API = (() => {
           },
           body: JSON.stringify({
             user: name,
-            score: score,
+            score,
           }),
-        }
+        },
       );
       return result.json();
     } catch (error) {

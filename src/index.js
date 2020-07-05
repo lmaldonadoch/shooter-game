@@ -12,6 +12,7 @@ import LeaderBoardScene from './Scenes/LeaderBoardScene';
 import StoryScene from './Scenes/StoryScene';
 import Model from './Model';
 
+// eslint-disable-next-line no-undef
 class Game extends Phaser.Game {
   constructor() {
     super(config);

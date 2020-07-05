@@ -2,8 +2,8 @@ import 'phaser';
 import { Player, Dementor, DeathEater } from '../Objects/Entities';
 import LocalStorage from '../Objects/localStorage';
 
-var scoreText;
-
+let scoreText;
+// eslint-disable-next-line no-undef
 export default class GameScene extends Phaser.Scene {
   constructor() {
     super({ key: 'Game' });
@@ -31,7 +31,7 @@ export default class GameScene extends Phaser.Scene {
   }
 
   create() {
-    var score = 0;
+    let score = 0;
     this.add.image(600, 300, 'bg');
 
     scoreText = this.add.text(16, 16, 'score: 0', {
@@ -57,15 +57,20 @@ export default class GameScene extends Phaser.Scene {
       this,
       this.game.config.height * 0.05,
       this.game.config.height * 0.5,
-      'hp'
+      'hp',
     );
     this.player.setScale(1.5);
-
+    // eslint-disable-next-line no-undef
     this.keyW = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
+    // eslint-disable-next-line no-undef
     this.keyS = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
+    // eslint-disable-next-line no-undef
     this.keyA = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
+    // eslint-disable-next-line no-undef
     this.keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
+    // eslint-disable-next-line no-undef
     this.keyJ = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.J);
+    // eslint-disable-next-line no-undef
     this.keyI = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.I);
 
     this.expeliarmus = this.add.group();
@@ -75,25 +80,23 @@ export default class GameScene extends Phaser.Scene {
 
     this.time.addEvent({
       delay: 1000,
-      callback: function () {
-        var enemy = null;
-
+      callback() {
+        let enemy = null;
+        // eslint-disable-next-line no-undef
         if (Phaser.Math.Between(0, 10) >= 5) {
           if (this.enemies.getChildren().length < 6) {
             enemy = new DeathEater(
               this,
               this.game.config.width * 0.9,
-              this.game.config.height * 0.5
+              this.game.config.height * 0.5,
             );
           }
-        } else {
-          if (this.getEnemiesByType('ChaserShip').length < 15) {
-            enemy = new Dementor(
-              this,
-              this.game.config.width * 0.95,
-              this.game.config.height * Math.random()
-            );
-          }
+        } else if (this.getEnemiesByType('ChaserShip').length < 15) {
+          enemy = new Dementor(
+            this,
+            this.game.config.width * 0.95,
+            this.game.config.height * Math.random(),
+          );
         }
 
         if (enemy !== null) {
@@ -105,46 +108,45 @@ export default class GameScene extends Phaser.Scene {
       loop: true,
     });
 
-    this.physics.add.collider(this.expeliarmus, this.enemies, function (
-      expeliarmus,
-      enemy
-    ) {
-      if (enemy) {
-        if (enemy.getData('type') === 'GunShip') {
-          enemy.wandless(true);
-          enemy.onDestroy();
-          expeliarmus.destroy();
-          score += 15;
-          scoreText.setText('Score: ' + score);
-          LocalStorage.saveLocalStorage(score);
-        } else {
-          expeliarmus.destroy();
+    this.physics.add.collider(
+      this.expeliarmus,
+      this.enemies,
+      (expeliarmus, enemy) => {
+        if (enemy) {
+          if (enemy.getData('type') === 'GunShip') {
+            enemy.wandless(true);
+            enemy.onDestroy();
+            expeliarmus.destroy();
+            score += 15;
+            scoreText.setText(`Score: ${score}`);
+            LocalStorage.saveLocalStorage(score);
+          } else {
+            expeliarmus.destroy();
+          }
         }
-      }
-    });
+      },
+    );
 
-    this.physics.add.collider(this.expectopatronum, this.enemies, function (
-      expectopatronum,
-      enemy
-    ) {
-      if (enemy) {
-        if (enemy.getData('type') === 'ChaserShip') {
-          enemy.wandless(true);
-          enemy.onDestroy();
-          expectopatronum.destroy();
-          score += 10;
-          scoreText.setText('Score: ' + score);
-          LocalStorage.saveLocalStorage(score);
-        } else {
-          expectopatronum.destroy();
+    this.physics.add.collider(
+      this.expectopatronum,
+      this.enemies,
+      (expectopatronum, enemy) => {
+        if (enemy) {
+          if (enemy.getData('type') === 'ChaserShip') {
+            enemy.wandless(true);
+            enemy.onDestroy();
+            expectopatronum.destroy();
+            score += 10;
+            scoreText.setText(`Score: ${score}`);
+            LocalStorage.saveLocalStorage(score);
+          } else {
+            expectopatronum.destroy();
+          }
         }
-      }
-    });
+      },
+    );
 
-    this.physics.add.overlap(this.player, this.enemies, function (
-      player,
-      enemy
-    ) {
+    this.physics.add.overlap(this.player, this.enemies, (player, enemy) => {
       if (!player.getData('isDead') && !enemy.getData('isDead')) {
         player.wandless(true);
         player.onDestroy();
@@ -153,10 +155,7 @@ export default class GameScene extends Phaser.Scene {
       }
     });
 
-    this.physics.add.overlap(this.player, this.enemyLasers, function (
-      player,
-      laser
-    ) {
+    this.physics.add.overlap(this.player, this.enemyLasers, (player, laser) => {
       if (!player.getData('isDead') && !laser.getData('isDead')) {
         player.wandless(true);
         laser.destroy();
@@ -166,10 +165,10 @@ export default class GameScene extends Phaser.Scene {
   }
 
   getEnemiesByType(type) {
-    var arr = [];
-    for (var i = 0; i < this.enemies.getChildren().length; i++) {
-      var enemy = this.enemies.getChildren()[i];
-      if (enemy.getData('type') == type) {
+    const arr = [];
+    for (let i = 0; i < this.enemies.getChildren().length; i += 1) {
+      const enemy = this.enemies.getChildren()[i];
+      if (enemy.getData('type') === type) {
         arr.push(enemy);
       }
     }
@@ -197,7 +196,7 @@ export default class GameScene extends Phaser.Scene {
       } else {
         this.player.setData(
           'timerShootTick',
-          this.player.getData('timerShootDelay') - 1
+          this.player.getData('timerShootDelay') - 1,
         );
         this.player.setData('isShootingExpeliarmus', false);
       }
@@ -207,7 +206,7 @@ export default class GameScene extends Phaser.Scene {
       } else {
         this.player.setData(
           'timerShootTick',
-          this.player.getData('timerShootDelay') - 1
+          this.player.getData('timerShootDelay') - 1,
         );
         this.player.setData('isShootingExpectoPatronum', false);
       }
@@ -220,15 +219,15 @@ export default class GameScene extends Phaser.Scene {
   }
 
   removeEntities(entities) {
-    for (var i = 0; i < entities.getChildren().length; i++) {
-      var entity = entities.getChildren()[i];
+    for (let i = 0; i < entities.getChildren().length; i += 1) {
+      const entity = entities.getChildren()[i];
       entity.update();
 
       if (
-        entity.x < -entity.displayWidth ||
-        entity.x > this.game.config.width + entity.displayWidth ||
-        entity.y < -entity.displayHeight * 4 ||
-        entity.y > this.game.config.height + entity.displayHeight
+        entity.x < -entity.displayWidth
+        || entity.x > this.game.config.width + entity.displayWidth
+        || entity.y < -entity.displayHeight * 4
+        || entity.y > this.game.config.height + entity.displayHeight
       ) {
         if (entity) {
           entity.destroy();

@@ -1,7 +1,7 @@
 import 'phaser';
 import config from '../Config/config';
 import Button from '../Objects/Button';
-
+// eslint-disable-next-line no-undef
 export default class TitleScene extends Phaser.Scene {
   constructor() {
     super('Title');
@@ -21,7 +21,7 @@ export default class TitleScene extends Phaser.Scene {
       'blueButton1',
       'blueButton2',
       'Play',
-      'StoryScene'
+      'StoryScene',
     );
 
     this.optionsButton = new Button(
@@ -31,7 +31,7 @@ export default class TitleScene extends Phaser.Scene {
       'blueButton1',
       'blueButton2',
       'Options',
-      'Options'
+      'Options',
     );
 
     this.creditsButton = new Button(
@@ -41,7 +41,7 @@ export default class TitleScene extends Phaser.Scene {
       'blueButton1',
       'blueButton2',
       'Credits',
-      'Credits'
+      'Credits',
     );
 
     this.leaderButton = new Button(
@@ -51,7 +51,7 @@ export default class TitleScene extends Phaser.Scene {
       'blueButton1',
       'blueButton2',
       'Top Scores',
-      'LeaderBoardScene'
+      'LeaderBoardScene',
     );
 
     this.model = this.sys.game.globals.model;
@@ -64,18 +64,21 @@ export default class TitleScene extends Phaser.Scene {
   }
 
   centerButton(gameObject, offset = 0) {
+    // eslint-disable-next-line no-undef
     Phaser.Display.Align.In.Center(
       gameObject,
       this.add.zone(
         config.width / 2,
         config.height / 2 - offset * 100,
         config.width,
-        config.height
-      )
+        config.height,
+      ),
     );
   }
 
+  // eslint-disable-next-line class-methods-use-this
   centerButtonText(gameText, gameButton) {
+    // eslint-disable-next-line no-undef
     Phaser.Display.Align.In.Center(gameText, gameButton);
   }
 }

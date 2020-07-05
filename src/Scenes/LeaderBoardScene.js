@@ -2,7 +2,7 @@ import 'phaser';
 import config from '../Config/config';
 import API from '../Objects/api';
 import Button from '../Objects/Button';
-
+// eslint-disable-next-line no-undef
 export default class LeaderBoardScene extends Phaser.Scene {
   constructor() {
     super('LeaderBoardScene');
@@ -15,10 +15,7 @@ export default class LeaderBoardScene extends Phaser.Scene {
   create() {
     this.add.image(600, 300, 'bg');
     API.getScores().then((response) => {
-      console.log(response);
-      const sortedResponse = response.result.sort((a, b) => {
-        return b.score - a.score;
-      });
+      const sortedResponse = response.result.sort((a, b) => b.score - a.score);
       let namesToDisplay = '';
 
       for (let i = 0; i < 7; i += 1) {
@@ -42,11 +39,11 @@ export default class LeaderBoardScene extends Phaser.Scene {
         config.width / 2,
         config.height / 2,
         config.width,
-        config.height
+        config.height,
       );
-
+      // eslint-disable-next-line no-undef
       Phaser.Display.Align.In.Center(this.creditsText, this.zone);
-
+      // eslint-disable-next-line no-undef
       Phaser.Display.Align.In.Center(this.madeByText, this.zone);
 
       this.creditsText.setY(20);
@@ -60,7 +57,7 @@ export default class LeaderBoardScene extends Phaser.Scene {
       'blueButton1',
       'blueButton2',
       'Back',
-      'Title'
+      'Title',
     );
   }
 }

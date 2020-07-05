@@ -1,14 +1,13 @@
 import 'phaser';
 import Button from '../Objects/Button';
 
+// eslint-disable-next-line no-undef
 export default class OptionsScene extends Phaser.Scene {
   constructor() {
     super('Options');
   }
 
   preload() {
-    //load background
-
     this.load.image('bg', 'assets/entities/logo-big.png');
   }
 
@@ -26,21 +25,15 @@ export default class OptionsScene extends Phaser.Scene {
     this.musicButton.setInteractive();
     this.soundButton.setInteractive();
 
-    this.musicButton.on(
-      'pointerdown',
-      function () {
-        this.model.musicOn = !this.model.musicOn;
-        this.updateAudio();
-      }.bind(this)
-    );
+    this.musicButton.on('pointerdown', () => {
+      this.model.musicOn = !this.model.musicOn;
+      this.updateAudio();
+    });
 
-    this.soundButton.on(
-      'pointerdown',
-      function () {
-        this.model.soundOn = !this.model.soundOn;
-        this.updateAudio();
-      }.bind(this)
-    );
+    this.soundButton.on('pointerdown', () => {
+      this.model.soundOn = !this.model.soundOn;
+      this.updateAudio();
+    });
 
     this.menuButton = new Button(
       this,
@@ -49,7 +42,7 @@ export default class OptionsScene extends Phaser.Scene {
       'blueButton1',
       'blueButton2',
       'Menu',
-      'Title'
+      'Title',
     );
 
     this.updateAudio();

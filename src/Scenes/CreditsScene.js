@@ -1,7 +1,8 @@
 import 'phaser';
 import config from '../Config/config';
 import Button from '../Objects/Button';
-
+/* eslint-disable func-names */
+// eslint-disable-next-line no-undef
 export default class CreditsScene extends Phaser.Scene {
   constructor() {
     super('Credits');
@@ -25,7 +26,7 @@ export default class CreditsScene extends Phaser.Scene {
       config.width / 2,
       config.height / 2,
       config.width,
-      config.height
+      config.height,
     );
 
     this.titleButton = new Button(
@@ -35,11 +36,11 @@ export default class CreditsScene extends Phaser.Scene {
       'blueButton1',
       'blueButton2',
       'Back',
-      'Title'
+      'Title',
     );
-
+    // eslint-disable-next-line no-undef
     Phaser.Display.Align.In.Center(this.creditsText, this.zone);
-
+    // eslint-disable-next-line no-undef
     Phaser.Display.Align.In.Center(this.madeByText, this.zone);
 
     this.madeByText.setY(1000);
@@ -50,8 +51,8 @@ export default class CreditsScene extends Phaser.Scene {
       ease: 'Power1',
       duration: 3000,
       delay: 1000,
-      onComplete: function () {
-        this.destroy;
+      onComplete() {
+        this.destroy();
       },
     });
 
@@ -62,7 +63,7 @@ export default class CreditsScene extends Phaser.Scene {
       duration: 8000,
       delay: 1000,
       onComplete: function () {
-        this.madeByTween.destroy;
+        this.madeByTween.destroy();
         this.scene.start('Title');
       }.bind(this),
     });
@@ -73,7 +74,7 @@ export default class CreditsScene extends Phaser.Scene {
       ease: 'Power1',
       duration: 8000,
       delay: 1000,
-      onComplete: function () {}.bind(this),
+      onComplete() {},
     });
   }
 }

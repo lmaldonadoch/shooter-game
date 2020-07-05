@@ -3,7 +3,7 @@ import config from '../Config/config';
 import API from '../Objects/api';
 import Dom from '../Objects/dom';
 import LocalStorage from '../Objects/localStorage';
-
+// eslint-disable-next-line no-undef
 export default class SceneGameOver extends Phaser.Scene {
   constructor() {
     super({ key: 'SceneGameOver' });
@@ -11,15 +11,22 @@ export default class SceneGameOver extends Phaser.Scene {
 
   preload() {
     this.load.image('bg', 'assets/entities/logo-big.png');
+    // eslint-disable-next-line no-unused-expressions
     API;
   }
 
   create() {
+    // eslint-disable-next-line no-undef
     this.input.keyboard.removeCapture(Phaser.Input.Keyboard.KeyCodes.W);
+    // eslint-disable-next-line no-undef
     this.input.keyboard.removeCapture(Phaser.Input.Keyboard.KeyCodes.S);
+    // eslint-disable-next-line no-undef
     this.input.keyboard.removeCapture(Phaser.Input.Keyboard.KeyCodes.A);
+    // eslint-disable-next-line no-undef
     this.input.keyboard.removeCapture(Phaser.Input.Keyboard.KeyCodes.D);
+    // eslint-disable-next-line no-undef
     this.input.keyboard.removeCapture(Phaser.Input.Keyboard.KeyCodes.J);
+    // eslint-disable-next-line no-undef
     this.input.keyboard.removeCapture(Phaser.Input.Keyboard.KeyCodes.I);
 
     this.input.keyboard.enabled = false;
@@ -27,7 +34,7 @@ export default class SceneGameOver extends Phaser.Scene {
 
     this.add.image(600, 300, 'bg');
 
-    let score = LocalStorage.readLocalStorage();
+    const score = LocalStorage.readLocalStorage();
     LocalStorage.clearLocalStorage();
 
     this.title = this.add.text(this.game.config.width * 0.5, 128, 'GAME OVER', {
@@ -46,7 +53,7 @@ export default class SceneGameOver extends Phaser.Scene {
       'blueButton1',
       'blueButton2',
       'Play Again',
-      'Game'
+      'Game',
     );
 
     this.title = this.add.text(
@@ -59,7 +66,7 @@ export default class SceneGameOver extends Phaser.Scene {
         fontStyle: 'bold',
         color: '#ffffff',
         align: 'center',
-      }
+      },
     );
     this.title.setOrigin(0.5);
 
@@ -68,7 +75,6 @@ export default class SceneGameOver extends Phaser.Scene {
 
     Dom.addButtonFunctionality(score);
 
-    // Credits score
     this.submitButton = new Button(
       this,
       config.width / 4,
@@ -76,7 +82,7 @@ export default class SceneGameOver extends Phaser.Scene {
       'blueButton1',
       'blueButton2',
       'Credits',
-      'Credits'
+      'Credits',
     );
   }
 }
