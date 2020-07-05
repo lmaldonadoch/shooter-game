@@ -4,7 +4,18 @@ var express = require('express');
 
 var app = express();
 
-app.use(express.static(path.join(__dirname, 'index.html')));
+if (process.env.NODE_ENV === 'production') {
+  // Exprees will serve up production assets
+  app.use(express.static('src'));
+
+  // Express serve up index.html file if it doesn't recognize route
+  const path = require('path');
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'index.html'));
+  });
+}
+
+app.use(express.static(path.join(__dirname, 'build')));
 app.set('port', process.env.PORT || 8080);
 
 var server = app.listen(app.get('port'), function () {
