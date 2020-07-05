@@ -13,6 +13,14 @@ module.exports = {
   module: {
     rules: [
       {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        loader: 'babel',
+        query: {
+          presets: ['es2015'],
+        },
+      },
+      {
         test: [/\.vert$/, /\.frag$/],
         use: 'raw-loader',
       },
@@ -26,17 +34,6 @@ module.exports = {
       },
     ],
   },
-
-  loader: [
-    {
-      test: /\.es6$/,
-      exclude: /node_modules/,
-      loader: 'babel',
-      query: {
-        presets: ['es2015'],
-      },
-    },
-  ],
 
   plugins: [
     new webpack.DefinePlugin({
