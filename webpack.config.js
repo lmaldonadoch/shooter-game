@@ -10,11 +10,6 @@ module.exports = {
     filename: 'project.bundle.js',
   },
 
-  devServer: {
-    inline: false,
-    contentBase: './dist',
-  },
-
   module: {
     rules: [
       {
@@ -46,14 +41,4 @@ module.exports = {
       WEBGL_RENDERER: JSON.stringify(true),
     }),
   ],
-
-  resolve: {
-    extensions: ['', '.js', '.jsx'],
-  },
-
-  devServer: {
-    inline: true,
-    contentBase: './dist',
-    port: 5000,
-  },
 };
