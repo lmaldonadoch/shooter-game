@@ -41,4 +41,14 @@ module.exports = {
       WEBGL_RENDERER: JSON.stringify(true),
     }),
   ],
+
+  resolve: {
+    extensions: ['', '.js', '.jsx'],
+  },
+
+  devServer: {
+    inline: true,
+    contentBase: './dist',
+    port: 5000,
+  },
 };
