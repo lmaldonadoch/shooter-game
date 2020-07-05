@@ -10,6 +10,11 @@ module.exports = {
     filename: 'project.bundle.js',
   },
 
+  devServer: {
+    inline: false,
+    contentBase: './dist',
+  },
+
   module: {
     rules: [
       {
