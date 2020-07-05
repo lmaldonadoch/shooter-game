@@ -26,7 +26,7 @@ export default class CreditsScene extends Phaser.Scene {
       config.width / 2,
       config.height / 2,
       config.width,
-      config.height,
+      config.height
     );
 
     this.titleButton = new Button(
@@ -36,7 +36,7 @@ export default class CreditsScene extends Phaser.Scene {
       'blueButton1',
       'blueButton2',
       'Back',
-      'Title',
+      'Title'
     );
     // eslint-disable-next-line no-undef
     Phaser.Display.Align.In.Center(this.creditsText, this.zone);
@@ -52,7 +52,7 @@ export default class CreditsScene extends Phaser.Scene {
       duration: 3000,
       delay: 1000,
       onComplete() {
-        this.destroy();
+        this.destroy;
       },
     });
 
