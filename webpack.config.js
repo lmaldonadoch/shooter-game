@@ -1,7 +1,7 @@
 const webpack = require('webpack');
 const path = require('path');
 
-/*eslint-disable import/no-unresolved*/
+/* eslint-disable import/no-unresolved */
 
 module.exports = {
   entry: './src/index.js',
