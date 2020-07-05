@@ -9,9 +9,9 @@ var app = express();
 //   app.use('/build', express.static(path.join(__dirname, 'build')));
 
 //   // Express serve up index.html file if it doesn't recognize route
-//   app.get('*', (req, res) => {
-//     res.sendFile(path.resolve(__dirname, 'index.html'));
-//   });
+app.get('*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, 'index.html'));
+});
 // }
 
 app.set('port', process.env.PORT || 8080);
