@@ -27,7 +27,7 @@ module.exports = {
     ],
   },
 
-  loaders: [
+  loader: [
     {
       test: /\.es6$/,
       exclude: /node_modules/,
