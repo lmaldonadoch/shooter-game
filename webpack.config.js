@@ -1,4 +1,3 @@
-
 const webpack = require('webpack');
 const path = require('path');
 
@@ -27,6 +26,17 @@ module.exports = {
       },
     ],
   },
+
+  loaders: [
+    {
+      test: /\.es6$/,
+      exclude: /node_modules/,
+      loader: 'babel',
+      query: {
+        presets: ['es2015'],
+      },
+    },
+  ],
 
   plugins: [
     new webpack.DefinePlugin({
