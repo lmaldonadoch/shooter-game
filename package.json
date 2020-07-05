@@ -5,7 +5,7 @@
   "main": "src/index.js",
   "scripts": {
     "build": "webpack",
-    "dev": "npm run build && webpack-dev-server --port=8000",
+    "dev": "npm run build && webpack-dev-server --port=5000",
     "start": "./node_modules/webpack/bin/webpack.js -p --progress && node server.js",
     "test": "jest",
     "heroku-prebuild": "npm install --dev"
@@ -43,6 +43,7 @@
     "regenerator-runtime": "^0.13.5",
     "style-loader": "^1.2.1",
     "url-loader": "^4.1.0",
-    "webpack": "^3.4.1"
+    "webpack": "^3.4.1",
+    "webpack-dev-server": "^2.11.5"
   }
 }
