@@ -6,7 +6,8 @@
   "scripts": {
     "build": "webpack",
     "start": "npm run build && webpack-dev-server --port=8000",
-    "test": "jest"
+    "test": "jest",
+    "heroku-prebuild": "npm install --dev"
   },
   "repository": {
     "type": "git",
@@ -30,7 +31,6 @@
     "stylelint": "^13.3.3",
     "stylelint-config-standard": "^20.0.0",
     "stylelint-scss": "^3.17.2",
-    "webpack": "^3.4.1",
     "webpack-dev-server": "^2.11.0"
   },
   "author": "Luis Angel Maldonado Chavez",
@@ -41,6 +41,7 @@
     "phaser": "^3.23.0",
     "regenerator-runtime": "^0.13.5",
     "style-loader": "^1.2.1",
-    "url-loader": "^4.1.0"
+    "url-loader": "^4.1.0",
+    "webpack": "^3.4.1"
   }
 }
