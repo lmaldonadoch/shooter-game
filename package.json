@@ -5,7 +5,8 @@
   "main": "src/index.js",
   "scripts": {
     "build": "webpack",
-    "start": "npm run build && webpack-dev-server --port=8000",
+    "dev": "npm run build && webpack-dev-server --port=8000",
+    "start": "./node_modules/webpack/bin/webpack.js -p --progress && node server.js",
     "test": "jest",
     "heroku-prebuild": "npm install --dev"
   },
@@ -30,7 +31,8 @@
     "raw-loader": "^0.5.1",
     "stylelint": "^13.3.3",
     "stylelint-config-standard": "^20.0.0",
-    "stylelint-scss": "^3.17.2"
+    "stylelint-scss": "^3.17.2",
+    "webpack-dev-server": "^2.11.5"
   },
   "author": "Luis Angel Maldonado Chavez",
   "dependencies": {
@@ -41,7 +43,6 @@
     "regenerator-runtime": "^0.13.5",
     "style-loader": "^1.2.1",
     "url-loader": "^4.1.0",
-    "webpack": "^3.4.1",
-    "webpack-dev-server": "^2.11.0"
+    "webpack": "^3.4.1"
   }
 }
