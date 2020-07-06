@@ -1,4 +1,4 @@
-# HP shooter game
+# HP Dementors Scape shooter-game
 
 [![Contributors][contributors-shield]][contributors-url]
 [![Forks][forks-shield]][forks-url]
