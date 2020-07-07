@@ -2,7 +2,7 @@ import 'phaser';
 import config from '../Config/config';
 import API from '../Objects/api';
 import Button from '../Objects/Button';
-// eslint-disable-next-line no-undef
+/* eslint-disable no-undef */
 export default class LeaderBoardScene extends Phaser.Scene {
   constructor() {
     super('LeaderBoardScene');
@@ -41,9 +41,7 @@ export default class LeaderBoardScene extends Phaser.Scene {
         config.width,
         config.height,
       );
-      // eslint-disable-next-line no-undef
       Phaser.Display.Align.In.Center(this.creditsText, this.zone);
-      // eslint-disable-next-line no-undef
       Phaser.Display.Align.In.Center(this.madeByText, this.zone);
 
       this.creditsText.setY(20);

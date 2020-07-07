@@ -3,7 +3,7 @@ import config from '../Config/config';
 import Button from '../Objects/Button';
 /* eslint-disable func-names */
 /* eslint-disable no-unused-expressions */
-// eslint-disable-next-line no-undef
+/* eslint-disable no-undef */
 export default class CreditsScene extends Phaser.Scene {
   constructor() {
     super('Credits');
@@ -39,9 +39,7 @@ export default class CreditsScene extends Phaser.Scene {
       'Back',
       'Title',
     );
-    // eslint-disable-next-line no-undef
     Phaser.Display.Align.In.Center(this.creditsText, this.zone);
-    // eslint-disable-next-line no-undef
     Phaser.Display.Align.In.Center(this.madeByText, this.zone);
 
     this.madeByText.setY(1000);

@@ -3,7 +3,7 @@ import { Player, Dementor, DeathEater } from '../Objects/Entities';
 import LocalStorage from '../Objects/localStorage';
 
 let scoreText;
-// eslint-disable-next-line no-undef
+/* eslint-disable no-undef */
 export default class GameScene extends Phaser.Scene {
   constructor() {
     super({ key: 'Game' });
@@ -60,17 +60,11 @@ export default class GameScene extends Phaser.Scene {
       'hp',
     );
     this.player.setScale(1.5);
-    // eslint-disable-next-line no-undef
     this.keyW = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
-    // eslint-disable-next-line no-undef
     this.keyS = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
-    // eslint-disable-next-line no-undef
     this.keyA = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
-    // eslint-disable-next-line no-undef
     this.keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
-    // eslint-disable-next-line no-undef
     this.keyJ = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.J);
-    // eslint-disable-next-line no-undef
     this.keyI = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.I);
 
     this.expeliarmus = this.add.group();
@@ -82,7 +76,6 @@ export default class GameScene extends Phaser.Scene {
       delay: 1000,
       callback() {
         let enemy = null;
-        // eslint-disable-next-line no-undef
         if (Phaser.Math.Between(0, 10) >= 5) {
           if (this.enemies.getChildren().length < 6) {
             enemy = new DeathEater(

@@ -3,7 +3,7 @@ import config from '../Config/config';
 import API from '../Objects/api';
 import Dom from '../Objects/dom';
 import LocalStorage from '../Objects/localStorage';
-// eslint-disable-next-line no-undef
+/* eslint-disable no-undef */
 export default class SceneGameOver extends Phaser.Scene {
   constructor() {
     super({ key: 'SceneGameOver' });
@@ -16,17 +16,11 @@ export default class SceneGameOver extends Phaser.Scene {
   }
 
   create() {
-    // eslint-disable-next-line no-undef
     this.input.keyboard.removeCapture(Phaser.Input.Keyboard.KeyCodes.W);
-    // eslint-disable-next-line no-undef
     this.input.keyboard.removeCapture(Phaser.Input.Keyboard.KeyCodes.S);
-    // eslint-disable-next-line no-undef
     this.input.keyboard.removeCapture(Phaser.Input.Keyboard.KeyCodes.A);
-    // eslint-disable-next-line no-undef
     this.input.keyboard.removeCapture(Phaser.Input.Keyboard.KeyCodes.D);
-    // eslint-disable-next-line no-undef
     this.input.keyboard.removeCapture(Phaser.Input.Keyboard.KeyCodes.J);
-    // eslint-disable-next-line no-undef
     this.input.keyboard.removeCapture(Phaser.Input.Keyboard.KeyCodes.I);
 
     this.input.keyboard.enabled = false;

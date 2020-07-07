@@ -1,7 +1,7 @@
 import 'phaser';
 import config from '../Config/config';
 import Button from '../Objects/Button';
-// eslint-disable-next-line no-undef
+/* eslint-disable no-undef */
 export default class TitleScene extends Phaser.Scene {
   constructor() {
     super('Title');
@@ -64,7 +64,6 @@ export default class TitleScene extends Phaser.Scene {
   }
 
   centerButton(gameObject, offset = 0) {
-    // eslint-disable-next-line no-undef
     Phaser.Display.Align.In.Center(
       gameObject,
       this.add.zone(
@@ -78,7 +77,6 @@ export default class TitleScene extends Phaser.Scene {
 
   // eslint-disable-next-line class-methods-use-this
   centerButtonText(gameText, gameButton) {
-    // eslint-disable-next-line no-undef
     Phaser.Display.Align.In.Center(gameText, gameButton);
   }
 }
